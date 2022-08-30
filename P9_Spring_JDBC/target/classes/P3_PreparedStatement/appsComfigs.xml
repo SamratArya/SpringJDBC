@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	https://www.springframework.org/schema/beans/spring-beans.xsd"
+ 	xmlns:p="http://www.springframework.org/schema/p"
+ 	xmlns:context="http://www.springframework.org/schema/context" >
+
+	<!-- DriverManager DataSource -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="DriverDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+ 		<property name="url" value="jdbc:mysql://localhost:3306/springJdbc" />
+ 		<property name="username" value="root" />
+ 		<property name="password" value="" />
+	</bean> 	
+	
+	<!-- JDBC Template -->
+ 	<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+ 		<property name="dataSource">
+ 			<ref bean="DriverDataSource" />
+ 		</property>
+ 	</bean>
+ 	
+ 	<!-- Ex1_EmployeeDaoImpl -->
+ 	<bean class="P3_PreparedStatement.Ex1_EmployeeDaoImpl" name="Dao">
+ 		<property name="template" ref="jdbcTemplate"/>
+ 	</bean>
+ 	
+</beans>
